@@ -29,6 +29,7 @@ export default {
       return {
         tabItem: "tab1",
         data: null,
+        // 配置参数（以下是默认）
         props: {
           width: '100%',
           height:'300px'

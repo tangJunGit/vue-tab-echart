@@ -8,14 +8,16 @@ export default {
   props: {
     props: {
       type: Object,
-      default: {
-        width: "100%",
-        height: "300px"
+      default: () => {
+        return {
+          width: "100%",
+          height: "300px"
+        }
       }
     },
     data: {
       type: Object,
-      default: null
+      default: () => null
     },
   },
   data: function() {
