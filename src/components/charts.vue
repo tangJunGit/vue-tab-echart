@@ -1,18 +1,17 @@
 <template>
-  <div :style="{height:height,width:width}"></div>
+  <div :style="{height:props.height,width:props.width}"></div>
 </template>
 
 <script>
 export default {
   name: "charts",
   props: {
-    width: {
-      type: String,
-      default: "100%"
-    },
-    height: {
-      type: String,
-      default: "300px"
+    props: {
+      type: Object,
+      default: {
+        width: "100%",
+        height: "300px"
+      }
     },
     data: {
       type: Object,
