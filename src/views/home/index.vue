@@ -30,8 +30,8 @@ export default {
         tabItem: "tab1",
         data: null,
         props: {
-          width: '400px',
-          height:'400px'
+          width: '100%',
+          height:'300px'
         }
       }
   },
