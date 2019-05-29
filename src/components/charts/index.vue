@@ -20,17 +20,17 @@ export default {
       default: () => null
     },
   },
-  data: function() {
+  data() {
     return {
       chart: null
     };
   },
-  mounted: function() {
+  mounted() {
     if(this.data !== null){
        this.initChart();
     }
   },
-  beforeDestroy: function() {
+  beforeDestroy() {
     if (!this.chart) {
       return;
     }
@@ -38,7 +38,7 @@ export default {
     this.chart = null;
   },
   methods: {
-    setOptions: function() {
+    setOptions() {
       this.chart.setOption({
         title: { text: this.data.title },
         tooltip: {},
@@ -55,13 +55,10 @@ export default {
         ]
       });
     },
-    initChart: function() {
+    initChart() {
       this.chart = this.$echarts.init(this.$el);
       this.setOptions();
     }
   }
 };
 </script>
-
-<style scoped>
-</style>
