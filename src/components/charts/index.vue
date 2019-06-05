@@ -58,6 +58,10 @@ export default {
     initChart() {
       this.chart = this.$echarts.init(this.$el);
       this.setOptions();
+      
+      window.onresize = () => {
+        this.chart.resize();
+      };
     }
   }
 };
