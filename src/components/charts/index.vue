@@ -59,9 +59,9 @@ export default {
       this.chart = this.$echarts.init(this.$el);
       this.setOptions();
       
-      window.onresize = () => {
-        this.chart.resize();
-      };
+      window.addEventListener('resize', () => {
+        this.chart.resize()
+      })
     }
   }
 };
