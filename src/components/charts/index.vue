@@ -1,23 +1,24 @@
 <template>
-  <div :style="{height:props.height,width:props.width}"></div>
+  <div :style="{height:height}" style="width: '100%'"></div>
 </template>
 
 <script>
 export default {
   name: "charts",
   props: {
-    props: {
-      type: Object,
+    height: {
+      type: String,
       default: () => {
-        return {
-          width: "100%",
-          height: "300px"
-        }
+        return "300px"
       }
     },
+    title: {
+      type: String,
+      default: ''
+    },
     data: {
-      type: Object,
-      default: () => null
+      type: Array,
+      default: () => []
     },
   },
   data() {
@@ -26,8 +27,16 @@ export default {
     };
   },
   mounted() {
-    if(this.data !== null){
+    if(this.data && this.data.length){
        this.initChart();
+    }
+  },
+  watch: {
+    data: {
+      deep: true,
+      handler (val) {
+        this.initChart(val)
+      }
     }
   },
   beforeDestroy() {
@@ -40,26 +49,39 @@ export default {
   methods: {
     setOptions() {
       this.chart.setOption({
-        title: { text: this.data.title },
-        tooltip: {},
+        title: {
+          show: !!this.title,
+          text: this.title,
+          x: 'center',
+          y: 'top',
+        },
+        tooltip: {
+          confine: true,
+        },
+        calculable: true,
+        grid: {
+          containLabel: true 
+        },
         xAxis: {
-          data: this.data.xAxis
+          data: this.data.map(item => item.name)
         },
         yAxis: {},
         series: [
           {
             name: "",
             type: "bar",
-            data: this.data.series
+            barWidth: 20,
+            data: this.data.map(item => item.value)
           }
         ]
-      });
+      }, true);
     },
     initChart() {
       this.chart = this.$echarts.init(this.$el);
       this.setOptions();
       
       window.addEventListener('resize', () => {
+        if (!this.chart) return
         this.chart.resize()
       })
     }
